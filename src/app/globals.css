@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #030303;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(255, 220, 160, 0.25);
+  color: white;
+}
+
+.background-effect {
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(255, 210, 140, 0.06) 0%, transparent 35%),
+    radial-gradient(circle at center, rgba(255, 180, 100, 0.03) 0%, transparent 55%),
+    #020202;
+}
+
+.background-effect::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255, 220, 170, 0.03) 45%,
+      rgba(255, 220, 170, 0.08) 50%,
+      rgba(255, 220, 170, 0.03) 55%,
+      transparent 100%
+    );
+}
+
+.energy-line {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100vh;
+  transform: translateX(-50%);
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 220, 180, 0.95),
+      rgba(255, 240, 220, 1),
+      rgba(255, 220, 180, 0.95),
+      transparent
+    );
+  box-shadow:
+    0 0 20px rgba(255, 220, 180, 0.8),
+    0 0 50px rgba(255, 220, 180, 0.6),
+    0 0 120px rgba(255, 220, 180, 0.3);
+  z-index: -5;
+  animation: energyPulse 4s ease-in-out infinite;
+}
+
+.energy-line::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 220, 180, 0.12),
+      transparent
+    );
+  filter: blur(15px);
+}
+
+.grid-floor {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -10vh;
+  height: 45vh;
+  z-index: -10;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+.grid-floor::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform:
+    rotateX(75deg)
+    scale(2);
+  transform-origin: bottom;
+  background-image:
+    linear-gradient(rgba(255, 220, 180, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 220, 180, 0.08) 1px, transparent 1px);
+  background-size: 70px 70px;
+  animation: gridMove 20s linear infinite;
+}
+
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: -15;
+  overflow: hidden;
+}
+
+.particles::before,
+.particles::after {
+  content: "";
+  position: absolute;
+  inset: -200px;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 70% 20%, rgba(255,220,180,0.8), transparent),
+    radial-gradient(2px 2px at 40% 80%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 90% 70%, rgba(255,220,180,0.6), transparent),
+    radial-gradient(2px 2px at 10% 60%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 60% 50%, rgba(255,220,180,0.6), transparent),
+    radial-gradient(2px 2px at 80% 90%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 30% 40%, rgba(255,220,180,0.5), transparent);
+}
+
+.particles::before {
+  animation: particlesMove 120s linear infinite;
+  opacity: 0.6;
+}
+
+.particles::after {
+  animation: particlesMoveReverse 180s linear infinite;
+  opacity: 0.3;
+}
+
+.glow-center {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 700px;
+  height: 300px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle, rgba(255,220,180,0.35) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: -8;
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.65);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: rgba(255,220,180,1);
+  text-shadow:
+    0 0 10px rgba(255,220,180,0.6),
+    0 0 30px rgba(255,220,180,0.3);
+}
+
+.hero-role {
+  color: rgba(255,220,180,0.75);
+  letter-spacing: 0.35em;
+}
+
+.hero-scroll {
+  color: rgba(255,220,180,0.45);
+}
+
+.social-icon {
+  color: rgba(255,220,180,0.5);
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: rgba(255,240,220,1);
+  transform: translateY(-2px);
+  filter:
+    drop-shadow(0 0 10px rgba(255,220,180,0.8));
+}
+
+.section-title {
+  color: rgba(255,240,220,0.95);
+  text-shadow:
+    0 0 25px rgba(255,220,180,0.15);
+}
+
+.about-text {
+  color: rgba(255,255,255,0.72);
+}
+
+.card {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.015)
+    );
+  border: 1px solid rgba(255,220,180,0.08);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  border-color: rgba(255,220,180,0.25);
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 40px rgba(255,220,180,0.08);
+}
+
+@keyframes energyPulse {
+  0% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes gridMove {
+  from {
+    transform:
+      rotateX(75deg)
+      translateY(0)
+      scale(2);
+  }
+
+  to {
+    transform:
+      rotateX(75deg)
+      translateY(70px)
+      scale(2);
+  }
+}
+
+@keyframes particlesMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-120px);
+  }
+}
+
+@keyframes particlesMoveReverse {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(120px);
+  }
+}
+
+#technologie {
+    position: relative;
+}
+
+#technologies::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center, rgba(0, 0, 0, 0.03));
+    pointer-events: none;
+  }
