@@ -1,14 +1,22 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: Request) {
   try {
-    console.log("API KEY:", process.env.RESEND_API_KEY);
+    const apiKey = process.env.RESEND_API_KEY;
+
+    if (!apiKey) {
+      return Response.json(
+        {
+          success: false,
+          error: "Missing RESEND_API_KEY",
+        },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
 
     const body = await req.json();
-
-    console.log("BODY:", body);
 
     const { name, email, message } = body;
 
@@ -18,9 +26,9 @@ export async function POST(req: Request) {
       subject: "Neue Portfolio Nachricht",
       html: `
         <h2>Neue Nachricht</h2>
-        <p>${name}</p>
-        <p>${email}</p>
-        <p>${message}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong> ${message}</p>
       `,
     });
 
@@ -32,9 +40,12 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error(error);
 
-    return Response.json({
-      success: false,
-      error,
-    });
+    return Response.json(
+      {
+        success: false,
+        error: "Failed to send email",
+      },
+      { status: 500 }
+    );
   }
 }
